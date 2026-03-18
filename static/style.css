@@ -119,7 +119,7 @@ body {
     font-size: 0.95rem;
 }
 
-.align-right {
+.coins-table td.align-right {
     text-align: right;
 }
 
