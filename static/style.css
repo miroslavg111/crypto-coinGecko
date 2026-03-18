@@ -1,0 +1,167 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fb;
+    color: #1f2937;
+}
+
+.page-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 48px;
+}
+
+.hero {
+    margin-bottom: 24px;
+}
+
+.page-title {
+    margin: 0 0 8px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.page-subtitle {
+    margin: 0;
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+.controls-section {
+    margin-bottom: 24px;
+}
+
+.controls-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    align-items: end;
+    background: #ffffff;
+    padding: 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.control-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.control-group input,
+.control-group select,
+.control-group button {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1f2937;
+}
+
+.control-group input:focus,
+.control-group select:focus {
+    outline: none;
+    border-color: #9ca3af;
+}
+
+.button-group {
+    align-self: end;
+}
+
+.control-group button {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.control-group button:hover {
+    background-color: #f3f4f6;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.coins-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+}
+
+.coins-table th,
+.coins-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.coins-table th {
+    background-color: #f9fafb;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #374151;
+}
+
+.coins-table td {
+    font-size: 0.95rem;
+}
+
+.coins-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.message {
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.message-error {
+    color: #b91c1c;
+    border-color: #fecaca;
+    background-color: #fef2f2;
+}
+
+.positive {
+    color: #15803d;
+    font-weight: 600;
+}
+
+.negative {
+    color: #b91c1c;
+    font-weight: 600;
+}
+
+@media (max-width: 640px) {
+    .page-container {
+        padding: 24px 16px 40px;
+    }
+
+    .page-title {
+        font-size: 1.6rem;
+    }
+
+    .controls-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+.page-footer {
+    margin-top: 18px;
+    color: #6b7280;
+    font-size: 0.9rem;
+}

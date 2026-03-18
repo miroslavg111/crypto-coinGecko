@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Crypto Dashboard{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1 class="page-title">Crypto Dashboard</h1>
+    <p class="page-subtitle">Live cryptocurrency market data from CoinGecko</p>
+</section>
+
+<section class="controls-section">
+    <form method="GET" action="/" class="controls-form">
+        <div class="control-group">
+            <label for="q">Search</label>
+            <input
+                type="text"
+                id="q"
+                name="q"
+                placeholder="Bitcoin, ETH, Solana..."
+                value="{{ query }}"
+            >
+        </div>
+
+        <div class="control-group">
+            <label for="currency">Currency</label>
+            <select id="currency" name="currency">
+                <option value="usd" {% if currency == "usd" %}selected{% endif %}>USD</option>
+                <option value="eur" {% if currency == "eur" %}selected{% endif %}>EUR</option>
+                <option value="bgn" {% if currency == "bgn" %}selected{% endif %}>BGN</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="sort">Sort by</label>
+            <select id="sort" name="sort">
+                <option value="rank" {% if sort_by == "rank" %}selected{% endif %}>Rank</option>
+                <option value="market_cap" {% if sort_by == "market_cap" %}selected{% endif %}>Market Cap</option>
+                <option value="price" {% if sort_by == "price" %}selected{% endif %}>Price</option>
+                <option value="change_24h" {% if sort_by == "change_24h" %}selected{% endif %}>24h Change</option>
+                <option value="volume" {% if sort_by == "volume" %}selected{% endif %}>Volume</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="direction">Direction</label>
+            <select id="direction" name="direction">
+                <option value="desc" {% if direction == "desc" %}selected{% endif %}>Descending</option>
+                <option value="asc" {% if direction == "asc" %}selected{% endif %}>Ascending</option>
+            </select>
+        </div>
+
+        <div class="control-group button-group">
+            <button type="submit">Apply</button>
+        </div>
+    </form>
+</section>
+
+<section class="table-section">
+    {% if error_message %}
+        <div class="message message-error">
+            {{ error_message }}
+        </div>
+    {% elif not coins %}
+        <div class="message">
+            No coins found for your current search.
+        </div>
+    {% else %}
+        <div class="table-wrapper">
+            <table class="coins-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Coin</th>
+                        <th>Symbol</th>
+                        <th>Price</th>
+                        <th>24h Change</th>
+                        <th>Volume</th>
+                        <th>Market Cap</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for coin in coins %}
+                        <tr>
+                            <td>{{ coin.rank if coin.rank is not none else "—" }}</td>
+                            <td>{{ coin.name }}</td>
+                            <td>{{ coin.symbol }}</td>
+                            <td>
+                                {% if coin.price is not none %}
+                                    {{ "%.2f"|format(coin.price) }} {{ currency.upper() }}
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+                            <td class="{% if coin.change_24h is not none and coin.change_24h > 0 %}positive{% elif coin.change_24h is not none and coin.change_24h < 0 %}negative{% endif %}">
+                                {% if coin.change_24h is not none %}
+                                    {{ "%.2f"|format(coin.change_24h) }}%
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if coin.volume is not none %}
+                                    {{ "{:,.0f}".format(coin.volume) }}
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if coin.market_cap is not none %}
+                                    {{ "{:,.0f}".format(coin.market_cap) }}
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</section>
+
+<footer class="page-footer">
+    <p>Data provided by CoinGecko API.</p>
+</footer>
+{% endblock %}

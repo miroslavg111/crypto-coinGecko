@@ -1,0 +1,121 @@
+Minimal tech stack
+Backend
+
+    Python 3.11+
+
+    Flask
+
+    requests
+
+    python-dotenv for local env vars
+
+Frontend
+
+    Jinja2 templates
+
+    HTML/CSS
+
+    optional tiny JS only for polish, not required
+
+Deployment
+
+    Render Web Service
+
+    public HTTPS URL
+
+
+What Python will do
+
+In this version, Python is the main engine.
+
+Flask/Python responsibilities
+
+    call CoinGecko API
+
+    get top coins by market cap
+
+    extract only needed fields
+
+    apply:
+
+    search by coin name/symbol
+
+    sorting by selected column
+
+    currency switching
+
+    render final HTML table
+
+Browser responsibilities
+
+    submit form inputs
+
+    display the rendered page
+
+So the interaction becomes:
+
+    User changes search/sort/currency
+    → browser sends request to Flask
+    → Flask fetches/processes data
+    → Flask renders updated page
+    → browser shows result
+
+No SPA, no frontend framework, no API-heavy client logic
+
+Simple architecture
+Browser
+  ↓
+Flask route (/)
+  ↓
+Service layer (CoinGecko fetch + filter + sort)
+  ↓
+Jinja template render
+  ↓
+HTML response
+
+Recommended app structure
+crypto-dashboard/
+│
+├── app.py
+├── services.py
+├── requirements.txt
+├── render.yaml
+├── .env.example
+│
+├── templates/
+│   ├── base.html
+│   └── index.html
+│
+└── static/
+    └── style.css
+Very small internal model
+
+You do not need classes for v1. A list of dictionaries is enough.
+Example fields:
+    name
+    symbol
+    price
+    change_24h
+    volume
+    market_cap
+
+That’s minimal and practical.
+
+Chosen MVP scope
+Build exactly this:
+    fetch top 50 coins from CoinGecko
+    display price, 24h %, volume, market cap
+    search by coin name/symbol
+    sort by price / 24h / market cap
+    toggle currency USD/EUR/BGN
+    deploy to Render
+
+
+Deployment on Render
+1. Push the project to GitHub
+    git init
+    git add .
+    git commit -m "Initial commit"
+    git branch -M main
+    git remote add origin <your-repository-url>
+    git push -u origin main
