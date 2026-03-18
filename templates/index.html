@@ -84,7 +84,7 @@
                             <td>{{ coin.rank if coin.rank is not none else "—" }}</td>
                             <td>{{ coin.name }}</td>
                             <td>{{ coin.symbol }}</td>
-                            <td>
+                            <td class="align-right">
                                 {% if coin.price is not none %}
                                     {{ "%.2f"|format(coin.price) }} {{ currency.upper() }}
                                 {% else %}
