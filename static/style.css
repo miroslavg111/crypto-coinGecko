@@ -119,6 +119,10 @@ body {
     font-size: 0.95rem;
 }
 
+.align-right {
+    text-align: right;
+}
+
 .coins-table tbody tr:hover {
     background-color: #f9fafb;
 }
